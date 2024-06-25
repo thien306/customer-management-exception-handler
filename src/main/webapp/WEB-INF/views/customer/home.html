@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head">
+    <title>Home Customer</title>
+</head>
+<body>
+<h3>Customers</h3>
+<p>
+    <a class="no-underline" th:href="@{/customers/create}">
+        Add new customer
+    </a>
+</p>
+
+<div class="notify">
+    <div th:if="${message}">
+        <span th:text="${message}"></span>
+    </div>
+</div>
+
+<table id = "customers">
+    <thead>
+    <tr>
+        <th>STT</th>
+        <th>name</th>
+        <th>email</th>
+        <th>address</th>
+        <th>Update</th>
+        <th>Delete</th>
+        <th>View</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c,cStatus : ${customer}">
+        <td th:text="${cStatus.count}"></td>
+        <td th:text="${c.getName()}"></td>
+        <td th:text="${c.getEmail()}"></td>
+        <td th:text="${c.getAddress()}"></td>
+        <td><a class="no-underline" th:href="@{/customers/update/{id}(id=${c.getId()})}">update</a></td>
+        <td><a class="no-underline" th:href="@{/customers/delete/{id}(id=${c.getId()})}">delete</a></td>
+        <td><a class="no-underline" th:href="@{/customers/view/{id}(id=${c.getId()})}">view</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
